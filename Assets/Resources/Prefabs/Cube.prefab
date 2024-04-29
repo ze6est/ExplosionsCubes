@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 8395902581885029830}
   - component: {fileID: 162991110430435081}
   - component: {fileID: 4245501607761281377}
+  - component: {fileID: 3181575482050598320}
+  - component: {fileID: 8762122722551904439}
+  - component: {fileID: 7890051282261137985}
+  - component: {fileID: 7020121127899097222}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -133,3 +137,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3181575482050598320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247706514691816757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae91fe5a537f0b4987da7bca9363d47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minCountCubes: 2
+  _maxCountCubes: 6
+  _chanceSeparation: 100
+  _divider: 2
+--- !u!114 &8762122722551904439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247706514691816757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0b15dd4f6591945a9a5b4c421ff787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _percentageReduction: 50
+--- !u!114 &7890051282261137985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247706514691816757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095333fee1528d54ba0a850e8d640b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colors:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.7735849, g: 0.14960839, b: 0.14960839, a: 1}
+  - {r: 0.8113208, g: 0.10332859, b: 0.7224747, a: 1}
+  - {r: 0.08802067, g: 0.11071243, b: 0.8113208, a: 1}
+  - {r: 0.06679422, g: 0.745283, b: 0.6973898, a: 1}
+  - {r: 0.10813772, g: 0.7924528, b: 0.08597367, a: 1}
+  - {r: 0.8301887, g: 0.7539268, b: 0.08223567, a: 1}
+--- !u!114 &7020121127899097222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247706514691816757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412c0b84a8ecb684782c6b39741193d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
