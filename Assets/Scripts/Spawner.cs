@@ -1,41 +1,50 @@
 using System;
-using Assets.Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] private Cube _template;
+    [SerializeField] private Separator _separator;
+
     [SerializeField] private int _minCountCubes = 2;
-    [SerializeField] private int _maxCountCubes = 6;
-    [SerializeField] private int _chanceSeparation = 100;
-    [SerializeField] private int _divider = 2;
+    [SerializeField] private int _maxCountCubes = 6;    
 
-    public event Action<GameObject> Spawned;    
+    public event Action<Cube> Spawned;
 
-    private void OnMouseUpAsButton()
-    {        
-        InstantiateCubes();
-        Destroy(gameObject);
-    }
+    private void Start() => 
+        _separator.Separated += OnSeparated;
 
-    private void InstantiateCubes()
+    private void OnDestroy() => 
+        _separator.Separated -= OnSeparated;
+
+    private void OnSeparated(Cube cube, int chanceSeparation) => 
+        SpawnCubes(cube, chanceSeparation);
+
+    private void SpawnCubes(Cube cube, int chanceSeparation)
     {
-        int percentage = Random.Range(0, Constant.MaxPercentage);
+        int count = Random.Range(_minCountCubes, _maxCountCubes);
 
-        if(percentage <= _chanceSeparation)
+        for (int i = 0; i < count; i++)
         {
-            int count = Random.Range(_minCountCubes, _maxCountCubes);
+            Cube newCube = Instantiate(_template, cube.transform.position, Quaternion.identity);
+            InitCubeComponents(newCube, cube, chanceSeparation);
 
-            for (int i = 0; i < count; i++)
-            {
-                GameObject newObject = Instantiate(gameObject, transform.position, Quaternion.identity);
-                newObject.GetComponent<Spawner>().ReduceChanceSeparation();
-
-                Spawned?.Invoke(newObject);
-            }
-        }        
+            Spawned?.Invoke(newCube);
+        }
     }
 
-    private void ReduceChanceSeparation() => 
-        _chanceSeparation /= _divider;
+    private void InitCubeComponents(Cube newCube, Cube oldCube, int chanceSeparation)
+    {
+        newCube.Init(chanceSeparation);
+
+        if (newCube.TryGetComponent(out SizeReducing sizeReducing))
+            sizeReducing.Init(oldCube);
+
+        if (newCube.TryGetComponent(out Explosion explosion))
+            explosion.Init(oldCube);
+
+        if (newCube.TryGetComponent(out ColorChanger colorChanger))
+            colorChanger.ChangeColor();
+    }
 }

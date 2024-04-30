@@ -1,29 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Spawner))]
+[RequireComponent(typeof(Renderer))]
 public class ColorChanger : MonoBehaviour
 {
     [SerializeField] private List<Color> _colors = new List<Color>();
 
-    private Spawner _spawner;
+    private Renderer _renderer;
 
     private void Awake() => 
-        _spawner = GetComponent<Spawner>();
+        _renderer = GetComponent<Renderer>();
 
-    private void Start() =>
-        _spawner.Spawned += OnSpawned;
-
-    private void OnDestroy() =>
-        _spawner.Spawned -= OnSpawned;
-
-    private void OnSpawned(GameObject newObject) => 
-        ChangeColor(newObject);
-
-    private void ChangeColor(GameObject gameObject)
+    public void ChangeColor()
     {
         int indexColor = Random.Range(0, _colors.Count);
 
-        gameObject.GetComponent<Renderer>().material.color = _colors[indexColor];
+        _renderer.material.color = _colors[indexColor];
     }
 }
