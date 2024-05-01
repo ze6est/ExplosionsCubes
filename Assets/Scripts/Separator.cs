@@ -10,7 +10,7 @@ public class Separator : MonoBehaviour
     [SerializeField] private List<Cube> _cubes = new List<Cube>();
     [SerializeField] private int _divider = 2;    
 
-    public event Action<Cube, int> Separated;
+    public event Action<Cube, int> Separated;    
 
     private void Start() => 
         Subscribe();
@@ -21,7 +21,7 @@ public class Separator : MonoBehaviour
     private void Subscribe()
     {
         foreach (Cube cube in _cubes)
-            cube.Clicked += OnClicked;
+            cube.Clicked += Separate;
 
         _spawner.Spawned += OnSpawned;
     }    
@@ -29,16 +29,13 @@ public class Separator : MonoBehaviour
     private void Unsubscribe()
     {
         foreach (Cube cube in _cubes)
-            cube.Clicked -= OnClicked;
+            cube.Clicked -= Separate;
 
         _spawner.Spawned -= OnSpawned;
-    }
-
-    private void OnClicked(Cube cube) => 
-        Separate(cube);
+    }    
 
     private void OnSpawned(Cube cube) => 
-        cube.Clicked += OnClicked;
+        cube.Clicked += Separate;
 
     private void Separate(Cube cube)
     {
@@ -49,6 +46,11 @@ public class Separator : MonoBehaviour
         {
             ReduceChanceSeparation(ref chanceSeparation);
             Separated?.Invoke(cube, chanceSeparation);
+        }
+        else
+        {
+            if (cube.TryGetComponent(out Explosion explosion))
+                explosion.Explode();
         }
     }
 

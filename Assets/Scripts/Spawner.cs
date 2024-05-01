@@ -39,10 +39,7 @@ public class Spawner : MonoBehaviour
         newCube.Init(chanceSeparation);
 
         if (newCube.TryGetComponent(out SizeReducing sizeReducing))
-            sizeReducing.Init(oldCube);
-
-        if (newCube.TryGetComponent(out Explosion explosion))
-            explosion.Init(oldCube);
+            sizeReducing.Init(oldCube);        
 
         if (newCube.TryGetComponent(out ColorChanger colorChanger))
             colorChanger.ChangeColor();
